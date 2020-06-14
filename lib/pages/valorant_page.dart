@@ -10,11 +10,15 @@ class ValorantReactionTestWidget extends StatefulWidget {
 
 class _VarolantReactionTestWidgetState
     extends State<ValorantReactionTestWidget> {
+  bool isTaped = false;
   bool _testing = false;
   bool _done = false;
+  Widget resultMessage;
   Stopwatch _stopwatch = new Stopwatch();
 
   void startTest() {
+    isTaped = false;
+    resultMessage = null;
     _testing = true;
     _done = false;
     _stopwatch.reset();
@@ -46,7 +50,65 @@ class _VarolantReactionTestWidgetState
         : GestureDetector(
             onTap: () {
               setState(() {
-                _stopwatch.isRunning ? _stopwatch.stop() : print('');
+                if (!isTaped) {
+                  isTaped = true;
+                  if (_stopwatch.isRunning) {
+                    _stopwatch.stop();
+                    resultMessage = FittedBox(
+                      fit: BoxFit.fill,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.av_timer, color: Colors.white, size: 64),
+                          Text(
+                            _stopwatch.elapsedMilliseconds.toString() + 'ms',
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 120),
+                          ),
+                          RaisedButton(
+                            child: Icon(
+                              Icons.replay,
+                              size: 26,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                startTest();
+                              });
+                            },
+                          )
+                        ],
+                      ),
+                    );
+                  } else {
+                    _stopwatch.reset();
+                    resultMessage = Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: FittedBox(
+                        fit: BoxFit.fill,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(Icons.warning, color: Colors.white, size: 64),
+                            Text(
+                              'Too Soon!',
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 120),
+                            ),
+                            RaisedButton(
+                              child: Icon(Icons.replay, size: 26),
+                              onPressed: () {
+                                setState(() {
+                                  startTest();
+                                });
+                              },
+                            )
+                          ],
+                        ),
+                      ),
+                    );
+                  }
+                } else {}
               });
             },
             child: Container(
@@ -56,35 +118,6 @@ class _VarolantReactionTestWidgetState
                     fit: BoxFit.cover,
                   ),
                 ),
-                child: _done
-                    ? Center(
-                        child: _stopwatch.isRunning
-                            ? Text('',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 120))
-                            : Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    _stopwatch.elapsedMilliseconds.toString() +
-                                        'ms',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 120),
-                                  ),
-                                  RaisedButton(
-                                    child: Icon(Icons.replay),
-                                    onPressed: () {
-                                      setState(() {
-                                        startTest();
-                                      });
-                                    },
-                                  )
-                                ],
-                              ))
-                    : Center(
-                        child: Text(
-                        '',
-                        style: TextStyle(color: Colors.white, fontSize: 120),
-                      ))));
+                child: Center(child: resultMessage)));
   }
 }
