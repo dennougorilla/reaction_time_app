@@ -36730,7 +36730,7 @@ $0:function(){this.a.jy()},
 $S:0}
 K.O5.prototype={
 $0:function(){var t=this.a
-C.aN.JH(window,"http://twitter.com/share?url=&text=You need to react faster than "+C.f.h(t.x.gw_())+"ms to kill me. &hashtags=valorant","twitter")
+C.aN.JH(window,"http://twitter.com/share?url=https://dennougorilla.github.io/reaction_time_lab/&text=You need to react faster than "+C.f.h(t.x.gw_())+"ms to kill me. &hashtags=valorant","twitter")
 t.az(new K.O2(t))},
 $S:0}
 K.O2.prototype={

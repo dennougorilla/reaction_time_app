@@ -106,7 +106,7 @@ class _VarolantReactionTestWidgetState
                                   child: Text('tweet'),
                                   onPressed: () {
                                     html.window.open(
-                                        'http://twitter.com/share?url=&text=You need to react faster than ${_stopwatch.elapsedMilliseconds.toString()}ms to kill me. &hashtags=valorant',
+                                        'http://twitter.com/share?url=https://dennougorilla.github.io/reaction_time_lab/&text=You need to react faster than ${_stopwatch.elapsedMilliseconds.toString()}ms to kill me. &hashtags=valorant',
                                         'twitter');
                                     setState(() {
                                       startTest();

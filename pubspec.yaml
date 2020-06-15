@@ -1,4 +1,4 @@
-name: reaction_time_lab
+name: reaction_time_app
 description: Reaction time test for valorant
 
 # The following line prevents the package from being accidentally published to
